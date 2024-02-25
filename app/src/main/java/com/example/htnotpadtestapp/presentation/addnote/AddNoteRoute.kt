@@ -29,6 +29,7 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,11 +41,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.htnotpadtestapp.R
 import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateBack: () -> Unit) {
 
     val snackBarHostState = remember { SnackbarHostState() }
+    val state = addNoteViewModel.state
     LaunchedEffect(key1 = Unit, block = {
         addNoteViewModel.signal.collectLatest {
             when (it) {
@@ -53,6 +54,30 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             }
         }
     })
+
+    AddNoteScreen(
+        changeDate = addNoteViewModel::changeDate,
+        changeTime =  addNoteViewModel::changeTime,
+        snackBarHostState = snackBarHostState,
+        state = state,
+        saveNote = addNoteViewModel::saveNote,
+        changeContent = addNoteViewModel::changeContent,
+        changeTitle = addNoteViewModel::changeTitle
+    )
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddNoteScreen(
+    changeDate: (date: Long?) -> Unit,
+    changeTime: (Int, Int) -> Unit,
+    snackBarHostState: SnackbarHostState,
+    state: MutableState<State>,
+    saveNote: () -> Unit,
+    changeContent: (String) -> Unit,
+    changeTitle: (String) -> Unit,
+) {
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Picker)
     val showDatePickerDialog = rememberSaveable { mutableStateOf(false) }
     val showTimePickerDialog = rememberSaveable { mutableStateOf(false) }
@@ -64,7 +89,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             confirmButton = {
                 TextButton(onClick = {
                     showDatePickerDialog.value = false
-                    addNoteViewModel.changeDate(
+                    changeDate.invoke(
                         datePickerState.selectedDateMillis
                     )
                 }) {
@@ -86,7 +111,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             confirmButton = {
                 TextButton(onClick = {
                     showTimePickerDialog.value = false
-                    addNoteViewModel.changeTime(
+                    changeTime.invoke(
                         timePickerState.hour,
                         timePickerState.minute
                     )
@@ -122,8 +147,8 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = addNoteViewModel.state.value.title,
-                onValueChange = { title -> addNoteViewModel.changeTitle(title) },
+                value = state.value.title,
+                onValueChange = { title -> changeTitle.invoke(title) },
                 label = { Text(text = stringResource(R.string.note_title_lable)) }
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -131,8 +156,8 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
                 modifier = Modifier
                     .fillMaxWidth()
                     .defaultMinSize(minHeight = 160.dp),
-                value = addNoteViewModel.state.value.content,
-                onValueChange = { content -> addNoteViewModel.changeContent(content) },
+                value = state.value.content,
+                onValueChange = { content -> changeContent.invoke(content) },
                 label = {
                     Text(text = stringResource(R.string.note_content_lable))
                 }
@@ -144,12 +169,12 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             ) {
                 Icon(imageVector = Icons.Default.Notifications, contentDescription = "")
                 TextButton(
-                    content = { Text(text = addNoteViewModel.state.value.uiDate) },
+                    content = { Text(text = state.value.uiDate) },
                     onClick = {
                         showDatePickerDialog.value = true
                     })
                 TextButton(
-                    content = { Text(text = addNoteViewModel.state.value.uiTime) },
+                    content = { Text(text = state.value.uiTime) },
                     onClick = {
                         showTimePickerDialog.value = true
                     })
@@ -158,7 +183,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = addNoteViewModel::saveNote
+                onClick = saveNote
             ) {
                 Text(text = stringResource(R.string.save_note_button_text))
             }

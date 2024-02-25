@@ -35,12 +35,18 @@ fun NotesRoute(
     onAddNote: () -> Unit,
     onNoteClick: (Note) -> Unit
 ) {
+    val state = notesViewModel.state.value
+
+    NoteScreen(state, onAddNote, onNoteClick)
+}
+
+@Composable
+fun NoteScreen(state: State, onAddNote: () -> Unit, onNoteClick: (Note) -> Unit) {
     Scaffold(floatingActionButton = {
         FloatingActionButton(onClick = onAddNote) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "")
         }
     }) {
-        val state = notesViewModel.state.value
         LazyColumn(modifier = Modifier.padding(it), content = {
             items(state.notes) { note ->
                 NoteItem(
