@@ -2,7 +2,6 @@ package com.example.htnotpadtestapp.presentation.notes
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
@@ -42,24 +43,30 @@ fun NotesRoute(
         val state = notesViewModel.state.value
         LazyColumn(modifier = Modifier.padding(it), content = {
             items(state.notes) { note ->
-                NoteItem(modifier = Modifier.clickable { onNoteClick.invoke(note) }, note)
-                NoteSpacer(Modifier.padding(horizontal = 8.dp))
+                NoteItem(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .clip(
+                            shape = MaterialTheme.shapes.medium,
+                        )
+                        .clickable { onNoteClick.invoke(note) },
+                    note
+                )
             }
         })
     }
 }
 
 @Composable
-private fun NoteSpacer(modifier: Modifier = Modifier) {
+private fun NoteSpacer(modifier: Modifier = Modifier, color: Color) {
     val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
     Canvas(
         modifier
-            .fillMaxWidth()
             .height(1.dp)
     ) {
 
         drawLine(
-            color = Color.Red,
+            color = color,
             start = Offset(0f, 0f),
             end = Offset(size.width, 0f),
             pathEffect = pathEffect
@@ -69,7 +76,9 @@ private fun NoteSpacer(modifier: Modifier = Modifier) {
 
 @Composable
 private fun NoteItem(modifier: Modifier = Modifier, note: Note) {
-    Box(modifier = modifier) {
+    Card(
+        modifier = modifier
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -82,7 +91,11 @@ private fun NoteItem(modifier: Modifier = Modifier, note: Note) {
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            NoteSpacer(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.outline
+            )
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = note.content,
                 style = MaterialTheme.typography.bodyMedium,
