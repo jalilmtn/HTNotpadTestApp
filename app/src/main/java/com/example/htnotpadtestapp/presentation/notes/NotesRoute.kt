@@ -41,7 +41,7 @@ fun NotesRoute(
 }
 
 @Composable
-fun NoteScreen(state: State, onAddNote: () -> Unit, onNoteClick: (Note) -> Unit) {
+private fun NoteScreen(state: State, onAddNote: () -> Unit, onNoteClick: (Note) -> Unit) {
     Scaffold(floatingActionButton = {
         FloatingActionButton(onClick = onAddNote) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "")

@@ -69,7 +69,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddNoteScreen(
+private fun AddNoteScreen(
     changeDate: (date: Long?) -> Unit,
     changeTime: (Int, Int) -> Unit,
     snackBarHostState: SnackbarHostState,
