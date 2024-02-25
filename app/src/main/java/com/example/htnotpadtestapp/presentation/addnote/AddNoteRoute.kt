@@ -53,7 +53,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
             }
         }
     })
-    val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
+    val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Picker)
     val showDatePickerDialog = rememberSaveable { mutableStateOf(false) }
     val showTimePickerDialog = rememberSaveable { mutableStateOf(false) }
     val timePickerState = rememberTimePickerState(is24Hour = true)
@@ -77,7 +77,7 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
                 }
             }
         ) {
-            DatePicker(state = datePickerState, showModeToggle = false)
+            DatePicker(state = datePickerState)
         }
     }
     if (showTimePickerDialog.value) {

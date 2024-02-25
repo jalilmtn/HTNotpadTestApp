@@ -5,10 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.htnotpadtestapp.common.Constants.NORMAL_DATE_FORMAT
-import com.example.htnotpadtestapp.common.Constants.NORMAL_TIME_FORMAT
 import com.example.htnotpadtestapp.common.NoteError
 import com.example.htnotpadtestapp.common.Resource
 import com.example.htnotpadtestapp.common.getDate
+import com.example.htnotpadtestapp.common.getTime
 import com.example.htnotpadtestapp.di.IoDispatcher
 import com.example.htnotpadtestapp.di.MainDispatcher
 import com.example.htnotpadtestapp.domain.model.Note
@@ -69,7 +69,7 @@ class AddNoteViewModel @Inject constructor(
                                         date = result.data.aDate,
                                         time = result.data.aTime,
                                         uiDate = getDate(result.data.aDate, NORMAL_DATE_FORMAT),
-                                        uiTime = getDate(result.data.aTime, NORMAL_TIME_FORMAT)
+                                        uiTime = getTime(result.data.aTime)
                                     )
                                 else
                                     State(
@@ -102,7 +102,7 @@ class AddNoteViewModel @Inject constructor(
         val time = TimeUnit.HOURS.toMillis(hour.toLong()) + TimeUnit.MINUTES.toMillis(
             min.toLong()
         )
-        state.value = state.value.copy(time = time, uiTime = "$hour:$min")
+        state.value = state.value.copy(time = time, uiTime = getTime(time))
     }
 
     fun changeContent(content: String) {

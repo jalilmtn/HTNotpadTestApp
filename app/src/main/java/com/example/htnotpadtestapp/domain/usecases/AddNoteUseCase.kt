@@ -7,6 +7,7 @@ import com.example.htnotpadtestapp.domain.model.Note
 import com.example.htnotpadtestapp.domain.model.toAlarmData
 import com.example.htnotpadtestapp.domain.repo.AlarmScheduler
 import com.example.htnotpadtestapp.domain.repo.NoteRepo
+import java.time.Instant
 import javax.inject.Inject
 
 class AddNoteUseCase @Inject constructor(
@@ -20,7 +21,7 @@ class AddNoteUseCase @Inject constructor(
             else -> {
                 noteRepo.addNote(note)
                 val utcTime = localToUTC(note.aTime + note.aDate)
-                if (utcTime != 0L)
+                if (utcTime > localToUTC(Instant.now().epochSecond * 1000))
                     alarmScheduler.setAlarm(note.toAlarmData().copy(dateTime = utcTime))
                 Resource.Success(null)
             }

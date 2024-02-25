@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.TimeZone
+import java.util.concurrent.TimeUnit
 
 @SuppressLint("SimpleDateFormat")
 fun localToUTC(time: Long): Long {
@@ -28,4 +29,12 @@ fun getDate(milliSeconds: Long, dateFormat: String?): String {
     val calendar: Calendar = Calendar.getInstance()
     calendar.timeInMillis = milliSeconds
     return formatter.format(calendar.time)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun getTime(millis: Long): String {
+    return String.format(
+        "%02d:%02d",
+        TimeUnit.MILLISECONDS.toHours(millis),
+        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.MILLISECONDS.toHours(millis) * 60)
 }
