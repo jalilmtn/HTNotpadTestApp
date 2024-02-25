@@ -1,12 +1,19 @@
 package com.example.htnotpadtestapp.data.repo
 
-import com.example.htnotpadtestapp.domain.model.Note
+import com.example.htnotpadtestapp.domain.model.AlarmData
 import com.example.htnotpadtestapp.domain.repo.AlarmScheduler
 
 class FakeAlarmScheduler : AlarmScheduler {
-    override fun setAlarm(note: Note) {
+    private val alarms = mutableListOf<AlarmData>()
+    override fun setAlarm(alarmData: AlarmData) {
+        alarms.add(alarmData)
     }
 
-    override fun cancel(note: Note) {
+    override fun cancel(alarmData: AlarmData) {
+        alarms.remove(alarmData)
+    }
+
+    fun getAlarms():MutableList<AlarmData>{
+        return alarms
     }
 }

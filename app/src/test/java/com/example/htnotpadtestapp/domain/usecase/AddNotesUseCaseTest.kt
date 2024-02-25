@@ -5,6 +5,7 @@ import com.example.htnotpadtestapp.common.Resource
 import com.example.htnotpadtestapp.data.repo.FakeAlarmScheduler
 import com.example.htnotpadtestapp.data.repo.FakeNoteRepo
 import com.example.htnotpadtestapp.domain.model.Note
+import com.example.htnotpadtestapp.domain.usecases.AddAlarmUseCase
 import com.example.htnotpadtestapp.domain.usecases.AddNoteUseCase
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
@@ -13,6 +14,7 @@ import org.junit.Test
 
 class AddNotesUseCaseTest {
     private lateinit var addNoteUseCase: AddNoteUseCase
+    private lateinit var addAlarmUseCase: AddAlarmUseCase
     private lateinit var fakeNoteRepo: FakeNoteRepo
     private lateinit var fakeAlarmScheduler: FakeAlarmScheduler
 
@@ -20,7 +22,8 @@ class AddNotesUseCaseTest {
     fun setUp() {
         fakeNoteRepo = FakeNoteRepo()
         fakeAlarmScheduler = FakeAlarmScheduler()
-        addNoteUseCase = AddNoteUseCase(fakeNoteRepo, fakeAlarmScheduler)
+        addAlarmUseCase = AddAlarmUseCase(fakeAlarmScheduler)
+        addNoteUseCase = AddNoteUseCase(fakeNoteRepo, addAlarmUseCase)
     }
 
     @Test
