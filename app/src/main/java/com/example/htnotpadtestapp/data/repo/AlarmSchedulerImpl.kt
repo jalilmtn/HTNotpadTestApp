@@ -38,6 +38,7 @@ class AlarmSchedulerImpl @Inject constructor(
         )
     }
 
+    //TODO: delete alarm here
     override fun cancel(alarmData: AlarmData) {
         alarmManager.cancel(
             PendingIntent.getBroadcast(
