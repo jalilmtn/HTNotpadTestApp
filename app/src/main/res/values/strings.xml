@@ -8,4 +8,11 @@
     <string name="life_style_chip_label">Life Style</string>
     <string name="dialog_confirm_text">Ok</string>
     <string name="dialog_cancel_text">Cancel</string>
+    <string name="today_title">ToDay</string>
+    <string name="later_today">Later Today</string>
+    <string name="sample_time">6:30 PM</string>
+    <string name="tomorrow_morning">Tomorrow Morning</string>
+    <string name="home">Home</string>
+    <string name="tehran">Tehran</string>
+    <string name="pick_a_date">Pick a Date</string>
 </resources>

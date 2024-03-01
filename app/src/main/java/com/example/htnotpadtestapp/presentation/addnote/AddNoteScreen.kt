@@ -144,38 +144,8 @@ fun AddNoteScreen(
 
     BottomSheetScaffold(
         sheetContent = {
-            Column(
-                Modifier.padding(start = 24.dp, bottom = 32.dp, end = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                AlarmBottomSheetRow(
-                    iconId = R.drawable.ic_clock,
-                    title = "Later Today",
-                    followingText = "6:30 PM"
-                )
-                HorizontalDivider(thickness = 1.5.dp, color = Grey88)
-                AlarmBottomSheetRow(
-                    iconId = R.drawable.ic_clock,
-                    title = "Tomorrow Morning",
-                    followingText = "6:30 PM"
-                )
-                HorizontalDivider(thickness = 1.5.dp, color = Grey88)
-                AlarmBottomSheetRow(
-                    iconId = R.drawable.ic_home,
-                    title = "Home",
-                    followingText = "Tehran"
-                )
-                HorizontalDivider(thickness = 1.5.dp, color = Grey88)
-                AlarmBottomSheetRow(
-                    modifier = Modifier.clickable {
-                        showDatePickerDialog.value = true
-                    },
-                    iconId = R.drawable.ic_calendar_transparent,
-                    title = "Pick a Date",
-                    followingIconId = if (state.value.uiDate.isEmpty()) R.drawable.ic_plus else null,
-                    followingText = if (state.value.uiDate.isNotEmpty()) state.value.uiDate + " " + state.value.uiTime else null
-                )
+            SheetContent(state) {
+                showDatePickerDialog.value = true
             }
         },
         scaffoldState = scaffoldState,
@@ -198,7 +168,8 @@ fun AddNoteScreen(
                 .fillMaxSize(),
         ) {
             NoteDetailTitleBar(Modifier.fillMaxWidth())
-            LargeSpacer()
+            if (!state.value.saved)
+                LargeSpacer()
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = if (state.value.saved) Color.Transparent else MaterialTheme.colorScheme.onSecondary
@@ -268,6 +239,41 @@ fun AddNoteScreen(
                     EditView(onDoneClick = saveNote)
             }
         }
+    }
+}
+
+@Composable
+private fun SheetContent(state: MutableState<State>, onPickDate: () -> Unit) {
+    Column(
+        Modifier.padding(start = 24.dp, bottom = 32.dp, end = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        AlarmBottomSheetRow(
+            iconId = R.drawable.ic_clock,
+            title = stringResource(R.string.later_today),
+            followingText = stringResource(R.string.sample_time)
+        )
+        HorizontalDivider(thickness = 1.5.dp, color = Grey88)
+        AlarmBottomSheetRow(
+            iconId = R.drawable.ic_clock,
+            title = stringResource(R.string.tomorrow_morning),
+            followingText = stringResource(R.string.sample_time)
+        )
+        HorizontalDivider(thickness = 1.5.dp, color = Grey88)
+        AlarmBottomSheetRow(
+            iconId = R.drawable.ic_home,
+            title = stringResource(R.string.home),
+            followingText = stringResource(R.string.tehran)
+        )
+        HorizontalDivider(thickness = 1.5.dp, color = Grey88)
+        AlarmBottomSheetRow(
+            modifier = Modifier.clickable(onClick = onPickDate),
+            iconId = R.drawable.ic_calendar_transparent,
+            title = stringResource(R.string.pick_a_date),
+            followingIconId = if (state.value.uiDate.isEmpty()) R.drawable.ic_plus else null,
+            followingText = if (state.value.uiDate.isNotEmpty()) state.value.uiDate + " " + state.value.uiTime else null
+        )
     }
 }
 
