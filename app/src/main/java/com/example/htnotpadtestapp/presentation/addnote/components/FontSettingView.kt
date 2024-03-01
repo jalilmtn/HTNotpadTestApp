@@ -3,7 +3,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.example.htnotpadtestapp.R
 
@@ -16,7 +15,6 @@ fun FontSettingView() {
             Icon(
                 painter = painterResource(id = R.drawable.ic_textalign_left),
                 contentDescription = null,
-                tint = Color.Unspecified
             )
         }
         IconToggleButton(
@@ -25,7 +23,6 @@ fun FontSettingView() {
             Icon(
                 painter = painterResource(id = R.drawable.ic_textalign_center),
                 contentDescription = null,
-                tint = Color.Unspecified
             )
         }
         IconToggleButton(
@@ -34,7 +31,6 @@ fun FontSettingView() {
             Icon(
                 painter = painterResource(id = R.drawable.ic_textalign_right),
                 contentDescription = null,
-                tint = Color.Unspecified
             )
         }
         IconToggleButton(
@@ -43,7 +39,6 @@ fun FontSettingView() {
             Icon(
                 painter = painterResource(id = R.drawable.ic_text_underline),
                 contentDescription = null,
-                tint = Color.Unspecified
             )
         }
         IconToggleButton(
@@ -52,7 +47,6 @@ fun FontSettingView() {
             Icon(
                 painter = painterResource(id = R.drawable.ic_pharagraph_spacing),
                 contentDescription = null,
-                tint = Color.Unspecified
             )
         }
     }

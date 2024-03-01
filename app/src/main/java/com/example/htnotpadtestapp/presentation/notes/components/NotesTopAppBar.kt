@@ -28,7 +28,6 @@ fun NotesTopAppBar() {
                 )
                 Icon(
                     painter = painterResource(id = R.drawable.ic_scroll),
-                    tint = Color.Unspecified,
                     contentDescription = ""
                 )
             }
@@ -45,9 +44,9 @@ fun NotesTopAppBar() {
                 onClick = { }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_notification_status),
+                    contentDescription = "",
                     tint = Color.Unspecified,
-                    contentDescription = ""
-                )
+                    )
             }
             IconButton(
                 onClick = { }) {

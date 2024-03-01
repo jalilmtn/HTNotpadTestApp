@@ -40,7 +40,6 @@ fun CircleIconButton(
         Icon(
             modifier = Modifier.padding(iconPadding),
             painter = painterResource(id = iconId),
-            tint = Color.Unspecified,
             contentDescription = "",)
     }
 }

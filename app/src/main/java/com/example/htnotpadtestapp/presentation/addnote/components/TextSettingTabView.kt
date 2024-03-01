@@ -18,7 +18,7 @@ import com.example.htnotpadtestapp.common.myTabIndicatorOffset
 @Composable
 fun TextSettingTabView() {
     val selectedTabPosition = remember {
-        mutableIntStateOf(0)
+        mutableIntStateOf(3)
     }
     val tabWith = 204
     TabRow(
