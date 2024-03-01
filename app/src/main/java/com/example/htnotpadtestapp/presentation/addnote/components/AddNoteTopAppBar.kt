@@ -9,7 +9,7 @@ import com.example.htnotpadtestapp.presentation.components.CircleIconButton
 import com.example.htnotpadtestapp.presentation.components.HTAppBar
 
 @Composable
-fun AddNoteTopAppBar(onBackClick: () -> Unit) {
+fun AddNoteTopAppBar(onBackClick: () -> Unit, onSetDate: () -> Unit) {
     HTAppBar(
         title = {},
         navigationIcon = {
@@ -17,14 +17,15 @@ fun AddNoteTopAppBar(onBackClick: () -> Unit) {
         },
         actions = {
             CircleIconButton(
+                modifier = Modifier.padding(start = 12.dp),
                 onclick = { /*TODO*/ },
-                iconId = R.drawable.ic_direct_inbox,
+                iconId = R.drawable.ic_pin,
                 iconSize = 48.dp
             )
             CircleIconButton(
                 modifier = Modifier.padding(start = 12.dp),
-                onclick = { /*TODO*/ },
-                iconId = R.drawable.ic_pin,
+                onclick = onSetDate,
+                iconId = R.drawable.ic_direct_inbox,
                 iconSize = 48.dp
             )
         },

@@ -1,4 +1,4 @@
-package com.example.htnotpadtestapp.presentation.notes
+package com.example.htnotpadtestapp.presentation.notes.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -20,7 +20,7 @@ import com.example.htnotpadtestapp.presentation.components.CircleText
 import com.example.htnotpadtestapp.presentation.components.HTFilterChip
 
 @Composable
-fun Categories(modifier: Modifier = Modifier, noteCount :Int = 0) {
+fun Categories(modifier: Modifier = Modifier, noteCount: Int = 0) {
     Card(
         modifier
             .clip(
@@ -29,7 +29,7 @@ fun Categories(modifier: Modifier = Modifier, noteCount :Int = 0) {
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             HTFilterChip(
                 selected = true,
@@ -43,7 +43,11 @@ fun Categories(modifier: Modifier = Modifier, noteCount :Int = 0) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         //TODO: change textColor based on selected
-                        Text(text = stringResource(R.string.all_chip_label), color = Color.White)
+                        Text(
+                            text = stringResource(R.string.all_chip_label),
+                            color = Color.White,
+                            style = MaterialTheme.typography.labelLarge
+                        )
                         Spacer(modifier = Modifier.width(8.dp))
                         CircleText(text = noteCount.toString())
                     }
@@ -55,7 +59,10 @@ fun Categories(modifier: Modifier = Modifier, noteCount :Int = 0) {
 
                 },
                 label = {
-                    Text(text = stringResource(R.string.work_chip_label))
+                    Text(
+                        text = stringResource(R.string.work_chip_label),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
             )
             HTFilterChip(
@@ -64,7 +71,10 @@ fun Categories(modifier: Modifier = Modifier, noteCount :Int = 0) {
 
                 },
                 label = {
-                    Text(text = stringResource(R.string.life_style_chip_label))
+                    Text(
+                        text = stringResource(R.string.life_style_chip_label),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
             )
         }

@@ -85,7 +85,7 @@ class AddNoteViewModel @Inject constructor(
     }
 
     fun changeTitle(title: String) {
-        state.value = state.value.copy(title = title)
+        state.value = state.value.copy(title = title, saved = false)
     }
 
     fun changeDate(date: Long?) {
@@ -106,7 +106,7 @@ class AddNoteViewModel @Inject constructor(
     }
 
     fun changeContent(content: String) {
-        state.value = state.value.copy(content = content)
+        state.value = state.value.copy(content = content, saved = false)
     }
 
     fun saveNote() {
@@ -129,7 +129,12 @@ class AddNoteViewModel @Inject constructor(
                         )
                     )
 
-                    is Resource.Success -> _signal.emit(Signal.SuccessSave)
+                    is Resource.Success -> {
+                        _signal.emit(Signal.SuccessSave)
+                        state.value = state.value.copy(
+                            saved = true
+                        )
+                    }
                 }
             }
         }
@@ -145,9 +150,10 @@ class AddNoteViewModel @Inject constructor(
 data class State(
     val title: String = "",
     val content: String = "",
-    val uiDate: String = "Set Date",
-    val uiTime: String = "Set Time",
+    val uiDate: String = "",
+    val uiTime: String = "",
     val date: Long = 0,
     val time: Long = 0,
-    val id: Int? = null
+    val id: Int? = null,
+    val saved: Boolean = false
 )

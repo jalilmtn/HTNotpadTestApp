@@ -119,9 +119,9 @@ val Typography = Typography(
     ),
     labelLarge = TextStyle(
         fontFamily = PoppinsFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
+        fontWeight = FontWeight.Medium,
+        fontSize = 13.sp,
+        lineHeight = 19.5.sp,
         letterSpacing = 0.1.sp
     ),
     labelMedium = TextStyle(

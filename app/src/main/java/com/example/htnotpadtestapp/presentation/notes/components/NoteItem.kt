@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.htnotpadtestapp.R
@@ -27,11 +29,15 @@ import com.example.htnotpadtestapp.presentation.components.LargeSpacer
 import com.example.htnotpadtestapp.presentation.components.MediumSpacer
 import com.example.htnotpadtestapp.presentation.components.ProfileView
 import com.example.htnotpadtestapp.presentation.theme.DarkBlue40
+import com.example.htnotpadtestapp.presentation.theme.textColor4
 
 @Composable
 fun NoteItem(modifier: Modifier = Modifier, note: Note) {
     Card(
-        modifier = modifier
+        modifier = modifier,
+        colors = CardDefaults.cardColors().copy(
+            containerColor = MaterialTheme.colorScheme.onSecondary
+        )
     ) {
         Column(
             modifier = Modifier
@@ -40,16 +46,17 @@ fun NoteItem(modifier: Modifier = Modifier, note: Note) {
         ) {
             Text(
                 text = note.title,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.titleSmall,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             MediumSpacer()
             Text(
                 text = note.content,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontWeight = FontWeight.Normal
+                ),
+                color = MaterialTheme.colorScheme.textColor4,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis
             )
@@ -69,7 +76,6 @@ fun NoteItem(modifier: Modifier = Modifier, note: Note) {
                     onClick = { }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_pin),
-                        tint = Color.Black,
                         contentDescription = ""
                     )
                 }

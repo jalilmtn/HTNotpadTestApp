@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun CircleText(
@@ -18,10 +19,11 @@ fun CircleText(
             .drawBehind {
                 drawCircle(
                     color = color,
-                    radius = this.size.minDimension + this.size.minDimension / 2
+                    radius = this.size.minDimension
                 )
             },
         text = text,
+        overflow = TextOverflow.Ellipsis,
         style = MaterialTheme.typography.labelSmall,
         color = Color.White
     )

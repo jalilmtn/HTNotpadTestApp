@@ -12,12 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.htnotpadtestapp.R
 import com.example.htnotpadtestapp.presentation.components.SmallestSpacer
 import com.example.htnotpadtestapp.presentation.notes.State
 import com.example.htnotpadtestapp.presentation.theme.DarkBlue40
+import com.example.htnotpadtestapp.presentation.theme.textColor3
 
 @Composable
 fun DateSelector(state: State, title: String, onPrev: () -> Unit, onNext: () -> Unit) {
@@ -29,7 +31,8 @@ fun DateSelector(state: State, title: String, onPrev: () -> Unit, onNext: () -> 
         IconButton(onClick = onPrev) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_left),
-                contentDescription = null
+                contentDescription = null,
+                tint = Color.Unspecified
             )
         }
 
@@ -44,19 +47,19 @@ fun DateSelector(state: State, title: String, onPrev: () -> Unit, onNext: () -> 
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
 
             Text(
                 text = state.dateTime.date,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.textColor3,
                 style = MaterialTheme.typography.bodySmall
             )
         }
         IconButton(onClick = onNext) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_right),
+                tint = Color.Unspecified,
                 contentDescription = null
             )
         }

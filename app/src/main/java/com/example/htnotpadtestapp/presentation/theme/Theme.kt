@@ -2,6 +2,7 @@ package com.example.htnotpadtestapp.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -31,9 +32,9 @@ private val DarkColorScheme = darkColorScheme(
     errorContainer = Red30,
     onErrorContainer = Red90,
     background = Grey10,
-    onBackground = Grey90,
+    onBackground = Color.White,
     surface = Grey10,
-    onSurface = Grey80,
+    onSurface = Color.White,
     inverseSurface = Grey90,
     inverseOnSurface = Grey20,
     surfaceVariant = BlueGrey30,
@@ -60,9 +61,9 @@ private val LightColorScheme = lightColorScheme(
     errorContainer = Red90,
     onErrorContainer = Red10,
     background = Grey95,
-    onBackground = Grey30,
+    onBackground = Color.Black,
     surface = Grey99,
-    onSurface = Grey10,
+    onSurface = Color.Black,
     inverseSurface = Grey20,
     inverseOnSurface = Grey95,
     surfaceVariant = Color.White,
@@ -70,10 +71,23 @@ private val LightColorScheme = lightColorScheme(
     outline = BlueGrey50
 )
 
+
+val ColorScheme.textColor2: Color @Composable
+get() = if (isSystemInDarkTheme()) Color.White else Black20
+
+val ColorScheme.textColor3: Color @Composable
+get() = if (isSystemInDarkTheme()) Color.White else Grey30
+
+val ColorScheme.textColor4: Color @Composable
+get() = if (isSystemInDarkTheme()) Color.White else Grey50
+
+val ColorScheme.textColor5: Color @Composable
+get() = if (isSystemInDarkTheme()) Color.White else Grey24
+
+
 @Composable
 fun HTNotpadTestAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

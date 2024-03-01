@@ -16,14 +16,14 @@ fun AddNoteRoute(addNoteViewModel: AddNoteViewModel = hiltViewModel(), navigateB
         addNoteViewModel.signal.collectLatest {
             when (it) {
                 is AddNoteViewModel.Signal.SnackBarMessage -> snackBarHostState.showSnackbar(message = it.message)
-                AddNoteViewModel.Signal.SuccessSave -> navigateBack.invoke()
+                AddNoteViewModel.Signal.SuccessSave -> Unit
             }
         }
     })
 
     AddNoteScreen(
         changeDate = addNoteViewModel::changeDate,
-        changeTime =  addNoteViewModel::changeTime,
+        changeTime = addNoteViewModel::changeTime,
         snackBarHostState = snackBarHostState,
         state = state,
         saveNote = addNoteViewModel::saveNote,
