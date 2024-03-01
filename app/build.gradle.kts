@@ -61,8 +61,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.fonts)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.google.accompanist.permissions)
+    implementation(libs.google.accompanist.systemuicontroller)
     implementation(libs.coroutines.android)
 
     implementation(libs.hilt.navigation.compose)

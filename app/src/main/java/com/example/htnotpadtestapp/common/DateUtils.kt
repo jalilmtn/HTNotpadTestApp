@@ -2,6 +2,8 @@ package com.example.htnotpadtestapp.common
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.TimeZone
@@ -36,5 +38,10 @@ fun getTime(millis: Long): String {
     return String.format(
         "%02d:%02d",
         TimeUnit.MILLISECONDS.toHours(millis),
-        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.MILLISECONDS.toHours(millis) * 60)
+        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.MILLISECONDS.toHours(millis) * 60
+    )
+}
+
+fun LocalDateTime.toHTFormat(): String {
+    return DateTimeFormatter.ofPattern("EEEE, d MMM").format(this)
 }

@@ -3,4 +3,9 @@
     <string name="note_content_lable">Content</string>
     <string name="note_title_lable">Title</string>
     <string name="save_note_button_text">Save</string>
+    <string name="all_chip_label">All</string>
+    <string name="work_chip_label">Work</string>
+    <string name="life_style_chip_label">Life Style</string>
+    <string name="dialog_confirm_text">Ok</string>
+    <string name="dialog_cancel_text">Cancel</string>
 </resources>

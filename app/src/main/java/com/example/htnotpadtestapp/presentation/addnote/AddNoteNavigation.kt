@@ -20,6 +20,7 @@ fun NavGraphBuilder.addNoteScreen(navigateBack: () -> Unit) {
         route = "$ROUTE_ADD_NOTE/{$ARG_NOTE_ID}",
         arguments = listOf(navArgument(ARG_NOTE_ID) {
             type = NavType.IntType
+            defaultValue = -1
         })
     ) {
         AddNoteRoute(navigateBack = navigateBack)
