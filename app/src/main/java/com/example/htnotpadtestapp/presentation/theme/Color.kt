@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 
 
 val Blue10 = Color(0xFF000F5E)
-val Blue20 = Color(0xFF001E92)
 val Blue30 = Color(0xFF002ECC)
 val Blue40 = Color(0xFF1546F6)
 val Blue80 = Color(0xFFB8C3FF)
@@ -39,7 +38,6 @@ val Grey24 = Color(0xFF747474)
 val Grey25 = Color(0xFF8E8E8E)
 val Grey30 = Color(0xFF6A6A6A)
 val Grey50 = Color(0xFFA9A9A9)
-val Grey80 = Color(0xFFC4C7C7)
 val Grey85 = Color(0xFFCCCCCC)
 val Grey87 = Color(0xFFDBDBDB)
 val Grey88 = Color(0xFFDFDFDF)
@@ -51,6 +49,5 @@ val BlueGrey30 = Color(0xFF45464F)
 val BlueGrey50 = Color(0xFF767680)
 val BlueGrey60 = Color(0xFF90909A)
 val BlueGrey80 = Color(0xFFC6C5D0)
-val BlueGrey90 = Color(0xFFE2E1EC)
 
 val Black20 = Color(0xFF181818)

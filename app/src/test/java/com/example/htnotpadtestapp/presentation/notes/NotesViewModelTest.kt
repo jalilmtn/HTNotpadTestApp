@@ -35,7 +35,7 @@ class NotesViewModelTest {
             UnconfinedTestDispatcher(),
             UnconfinedTestDispatcher()
         )
-        assertThat(notesViewModel.state.value).isEqualTo(State(emptyList()))
+        assertThat(notesViewModel.state.value.notes).isEqualTo(emptyList<Note>())
     }
 
 
